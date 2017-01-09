@@ -1,0 +1,41 @@
+
+1.Escreva um programa em Java que recebe 3 números, calcule e mostre a soma.
+
+
+2. Digite um valor e confira se ele é maior do que 5.Se sim mostrar 
+mensagem "O número digitado é maior do que 5", senão mostrar 
+
+mensagem "O número digitado é menor do que 5". 
+
+
+3. Calcular quatro notas de um aluno e verificar se nota é maior ou igual a 
+7, se sim mostrar a mensagem "Aluno Aprovado", senão mostrar a 
+mensagem "Aluno Reprovado". 
+
+
+
+
+
+4. Escreva um algoritmo para ler o salário mensal atual de um funcionário e 
+o percentual de reajuste. Calcular e escrever o valor do novo salário. 
+
+
+
+5. Escreva um algoritmo para ler uma temperatura em graus Celsius, 
+calcular e escreva o valor correspondente em graus Fahrenhet. 
+Para teste utilize o valor 100ºC o valor em Fahrenhet é: 212. 
+
+
+
+
+
+6. Faça um algoritmo que leia a idade de uma pessoa expressa em anos, 
+meses e dias e escreva a idade dessa pessoa expressa apenas em 
+dias. Considerar ano com 365 dias e mês com 30 dias. 
+
+
+7. Entrar com dois valores, efetuar soma e verificar se valor é maior do que 
+10, se sim mostrar mensagem "Valor maior do que 10", senão mostrar 
+a mensagem "Valor menor do que 10".
+
+
