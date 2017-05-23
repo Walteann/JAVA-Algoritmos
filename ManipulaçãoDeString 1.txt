@@ -1,0 +1,267 @@
+                          Java String: Manipulando métodos da classe String
+
+
+Veja neste artigo como funcionam os métodos da classe String, com conceitos e exemplos práticos em Java.
+
+Neste artigo trataremos de um assunto muito comum no desenvolvimento de softwares em Java: o uso dos métodos da classe String. Vamos “destrinchar” os métodos com conceitos e exemplos de como utilizá-los. Esperamos que todas as dúvidas que havia em relação a essa classe possam ser sanadas com este artigo.
+
+Antes de iniciarmos os exemplos e explicações dos métodos desta classe, é importante entender que na verdade a classe String é um “wrapper” de um vetor de “char”. Em outras palavras, o String está para um vetor de char assim como o Integer está para o tipo primitivo int. Não vamos entrar em detalhes do que seja um wrapper, pois não é foco deste artigo.
+
+Por esse motivo é que o código da Listagem 1 tem o mesmo efeito para ambas as situações.
+
+Listagem 1. vetor de char e String
+
+     char data[] = {'a', 'b', 'c'};
+       String str = new String(data);
+
+A principal diferença é que com o “char data[]” não tem-se todo o “poder” que a classe String nos proporciona para manipular esse vetor.
+
+
+                                                charAt
+                                                
+
+O nosso primeiro método é bem simples e consiste em retornar apenas um caractere em determinada posição de nossa String. Observe a Listagem 2.
+
+Listagem 2. Uso do charAt
+
+  String valor = "DEVMEDIA - Java";       
+  System.out.println(valor.charAt(0));
+   
+  Saída: D
+
+                                            codePointAt
+                                            
+
+Retorna o valor em UNICODE do caractere especificado no index do parâmetro. Confira a Listagem 3.
+
+Listagem 3. Uso do codePointAt
+
+  String valor = "DEVMEDIA - Java";
+               
+  System.out.println(valor.codePointAt(0));
+   
+  Saída: 68
+  
+
+Note que a codificação da letra 'D' correspondente a posição 0 na nossa String é igual a 68, considerando a codificação UNICODE.
+
+                                    compareTo e compareToIgnoreCase
+
+Ambos fazem comparação de duas Strings, sendo que o primeiro (compareTo) considera letras maiúsculas e minúsculas na comparação e o segundo (compareToIgnoreCase) ignora qualquer diferença de minúsculas ou maiúsculas. Ambos também retornam a quantidade de diferenças, sendo que nos importa saber, no momento, que quando o retorno for igual a zero significa que não há diferenças entre a String. Observe a Listagem 4.
+
+Listagem 4. Uso do compareTo e compareToIgnoreCase
+
+  String valor = "DEVMEDIA - Java";
+               
+    System.out.println(valor.compareTo("DEVMEDIA - Java") == 0 ? true : false);
+    System.out.println(valor.compareTo("DEVMEDIA - JAVA") == 0 ? true : false);
+    System.out.println(valor.compareToIgnoreCase
+     ("DEVMEDIA - JAVA") == 0 ? true : false);
+   
+  Saída:true
+  false
+  true
+
+                                        endsWith e startsWith
+                                        
+
+O método endsWith verifica se a String termina com o valor especificado, por outro lado o startsWith verifica se a String começa com o valor especificado. Sendo que o método startsWith tem duas variações: uma com o parâmetro “int toffset” e outra sem, onde o método que contém o parâmetro “int toffset” serve para dizer de onde deve começar a verificação do inicio da String. Veja o exemplo da Listagem 5.
+
+Listagem 5. Uso do endsWith, startsWith e startsWith com tooffset
+
+  String valor = "DEVMEDIA - Java";
+               
+               System.out.println(valor.endsWith("Java"));
+               System.out.println(valor.startsWith("DEV"));
+               System.out.println(valor.startsWith("ME", 3));
+   
+  Saída: true
+  true
+  true
+
+                                            toCharArray
+
+Converte uma String em um Array de char, ou seja, uma String de 10 posições irá ser convertida em um vetor char[] de 10 posições, conforme a Listagem 6.
+
+Listagem 6. Uso do toCharArray
+
+  String valor = "DEVMEDIA - Java";
+               
+               
+               for(char c : valor.toCharArray()){
+                      System.out.println("Char: "+c);
+               }
+   
+  Saída:
+  Char: D
+  Char: E
+  Char: V
+  Char: M
+  Char: E
+  Char: D
+  Char: I
+  Char: A
+  Char:  
+  Char: -
+  Char:  
+  Char: J
+  Char: a
+  Char: v
+  Char: a
+
+                                                getBytes
+
+Converte a String em um vetor de byte[]. Este método é muito útil principalmente quando precisamos salvar caracteres no banco desconsiderando a codificação atual. No PostgreSQL, por exemplo, você pode utilizar o tipo “bytea” que é análogo ao “byte” em Java. Assim como você pode converter para byte, você também pode voltar para String ou char. Observe a Listagem 7.
+
+Listagem 7. Uso do getBytes
+
+  String valor = "DEVMEDIA - Java";
+                      for(byte b : valor.getBytes()){
+                      System.out.println("byte: "+b);
+               }
+   
+  Saída:
+  byte: 68
+  byte: 69
+  byte: 86
+  byte: 77
+  byte: 69
+  byte: 68
+  byte: 73
+  byte: 65
+  byte: 32
+  byte: 45
+  byte: 32
+  byte: 74
+  byte: 97
+  byte: 118
+  byte: 97
+
+                                                isEmpty
+
+Um método muito utilizado e comum que verifica se uma String está ou não vazia, mas tenha atenção neste método, pois a verificação baseia-se se sua String possui tamanho = 0, ou seja, o String.length() = 0. Isso significa que caso você tente utilizar o isEmpty() em uma String que possui valor NULL você receberá um NullPointerException. Analise o exemplo da Listagem 8.
+
+Listagem 8. Usando isEmpty de forma errada
+
+  String valor = null;             
+  System.out.println(valor.isEmpty());
+   
+  Saída: Exception in thread "main" java.lang.NullPointerException
+         at StringManager.main(StringManager.java:9)
+
+                                                split
+
+O método split cria um array de Strings com base no “regex” passado via parâmetro, ou seja, ele divide a String em várias outras Strings com base no seu regex, o que é muito útil para separar tags em uma String completa, ex: “software, engenharia, computação”. Você pode transformar essa única String em um array com três Strings.
+
+Este método também possui uma variação, que é o parâmetro “int limit”, onde você identifica quantas vezes o regex será aplicado em toda String. Vamos ver exemplos presentes na Listagem 9.
+
+Listagem 9. Usando split e split com limit
+
+  /*
+                * Uso do split sem o LIMIT
+                * */
+               String valor = "DEVMEDIA - Java";
+               String[] valorComSplit = valor.split("-");
+               
+               for(String s : valorComSplit){
+                      System.out.println(s);
+               }
+  Saída:DEVMEDIA
+   Java
+   
+  /*
+                * Uso do split com o LIMIT
+                * */
+               String valor = "DEVMEDIA - Java - Engenharia - Software";
+               String[] valorComSplit = valor.split("-", 2);
+               
+               for(String s : valorComSplit){
+                      System.out.println(s);
+               }
+   
+  Saída:
+  DEVMEDIA
+   Java - Engenharia - Software
+  
+
+Por que no segundo bloco de código o split não divide “Java – Engenharia – Software” ? Simples, pois explicitamente dizemos quantas vezes o regex será aplicado, o que influência diretamente no tamanho final do nosso vetor, que será igual a dois.
+
+
+                                        substring e subSequence
+
+
+Ambos os métodos retornam uma parte específica de uma determinada String, sendo que o método substring retorna uma nova String e o método subSequence retorna um CharSequence. É importante ressaltar que o CharSequence é uma interface e a String é a implementação dessa interface. Observe o exemplo da Listagem 10.
+
+Listagem 10. Usando substring e subSequence
+
+  String valor = "DEVMEDIA - Java";
+               
+               System.out.println(valor.subSequence(0, 5));
+               System.out.println(valor.substring(0, 5));
+   
+  Saída:
+  DEVME
+  DEVME
+
+                                    toLowerCase, toUpperCase e trim
+
+O método toLowerCase converte toda a String para caixa baixa e o toUpperCase faz o inverso, convertendo toda a String para caixa alta. O método trim remove espaços em branco no inicial e no final da String, conforme exemplo da Listagem 11.
+
+Listagem 11. Uso do toLowerCase, toUpperCase e trim
+
+  String valor = "DEVMEDIA - Java";
+               
+               System.out.println(valor.toLowerCase());
+               System.out.println(valor.toUpperCase());
+               System.out.println(valor.trim());
+   
+  Saída:
+  devmedia - java
+  DEVMEDIA - JAVA
+  DEVMEDIA - Java
+
+                                                valueOf
+
+Este método converte diversos tipos (booleano, inteiro, char, double, float, long, Object e etc) para String, conforme exemplo da Listagem 12.
+
+Listagem 12. Uso do valueOf
+
+  //boolean
+               boolean myBoolean = true;       
+               System.out.println(String.valueOf(myBoolean));
+               
+               //float
+               float myFloat = -10;             
+               System.out.println(String.valueOf(myFloat));
+               
+               //int
+               int myInt = 9;
+               System.out.println(String.valueOf(myInt));
+               
+               ///double
+               double myDouble = 10.30;
+               System.out.println(String.valueOf(myDouble));
+   
+  Saída:
+  true
+  -10.0
+  9
+  10.3
+
+                                                format
+
+Como o próprio já sugere, o String.format realiza a formatação de uma String de acordo com as especificações passadas. Vamos ver como funciona no exemplo da Listagem 13.
+
+Listagem 13. Uso do format
+
+  String result = String.format("Hoje nós processamos %,d transações", 100000);
+               System.out.println(result);
+               
+               result = String.format("10 / 3 = %.2f", 10.0 / 3.0);
+               System.out.println(result);
+
+Em resumo, temos a String em si e os objetos que serão usados na formatação.
+
+O objetivo deste artigo foi demonstrar o uso com detalhes da classe String e a maioria dos seus métodos, definindo conceitos práticos e diretos juntamente com exemplos do funcionamento de cada um deles. Estudar esses tipos de Wrapper, como é o caso do Boolean, Integer entre outros, é importante para saber como manipular de forma correta os dados da sua aplicação, aumentando a produtividade e evitando trabalho desnecessário.
+
+Um exemplo comum é o uso do subString, que lhe auxilia no retorno de uma determinada parcela da String, enquanto que caso você não conhecesse tal recurso, seria obrigado a criar um laço de repetição para retornar os caracteres dentro do intervalo desejado, tarefas simples e triviais acabam tornando-se um problema quando não temos o conhecimento necessário para realizá-las.
